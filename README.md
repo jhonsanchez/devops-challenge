@@ -254,27 +254,381 @@ In this section it's listed the requirements needed to use this application:
 
 ## Terraform plan / Terratest
 
-(Shown as example)
-
-Add Output of Terraform Plan
+Output of Terraform Plan
 <details>
 <summary>Summary</summary>
   
 ```
 
-------------------------------------------------------------------------
-------------------------------------------------------------------------
-
-An execution plan has been generated and is shown below.
-Resource actions are indicated with the following symbols:
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following
+symbols:
   + create
- <= read (data resources)
 
-Plan: xx to add, 0 to change, 0 to destroy.
+Terraform will perform the following actions:
 
+  # aws_iam_role.lambda_role will be created
+  + resource "aws_iam_role" "lambda_role" {
+      + arn                   = (known after apply)
+      + assume_role_policy    = jsonencode(
+            {
+              + Statement = [
+                  + {
+                      + Action    = "sts.AssumeRole"
+                      + Effect    = "Allow"
+                      + Principal = {
+                          + Service = "lambda.amazonaws.com"
+                        }
+                      + Sid       = ""
+                    },
+                ]
+              + Version   = "2012-10-17"
+            }
+        )
+      + create_date           = (known after apply)
+      + force_detach_policies = false
+      + id                    = (known after apply)
+      + managed_policy_arns   = [
+          + "arn:aws:iam::aws:policy/service-role/AWSLambdaDynamoDBExecutionRole",
+          + "arn:aws:iam::aws:policy/service-role/AWSLambdaSQSQueueExecutionRole",
+        ]
+      + max_session_duration  = 3600
+      + name                  = "ReceiveFillingForm_role"
+      + name_prefix           = (known after apply)
+      + path                  = "/"
+      + tags_all              = (known after apply)
+      + unique_id             = (known after apply)
 
-------------------------------------------------------------------------
-------------------------------------------------------------------------
+      + inline_policy {
+          + name   = (known after apply)
+          + policy = (known after apply)
+        }
+    }
+
+  # aws_lambda_function.CheckBureau_lambda will be created
+  + resource "aws_lambda_function" "CheckBureau_lambda" {
+      + architectures                  = (known after apply)
+      + arn                            = (known after apply)
+      + filename                       = "../../output/lambdas//CheckBureau.zip"
+      + function_name                  = "CheckBureau"
+      + handler                        = "CheckBureau.lambda_handler"
+      + id                             = (known after apply)
+      + invoke_arn                     = (known after apply)
+      + last_modified                  = (known after apply)
+      + memory_size                    = 128
+      + package_type                   = "Zip"
+      + publish                        = false
+      + qualified_arn                  = (known after apply)
+      + reserved_concurrent_executions = -1
+      + role                           = (known after apply)
+      + runtime                        = "python3.8"
+      + signing_job_arn                = (known after apply)
+      + signing_profile_version_arn    = (known after apply)
+      + source_code_hash               = "+xOjjscpJd3Ayr0KQcRXU6LehRDZ1rDDuq9nklOlkfY="
+      + source_code_size               = (known after apply)
+      + tags_all                       = (known after apply)
+      + timeout                        = 3
+      + version                        = (known after apply)
+
+      + tracing_config {
+          + mode = (known after apply)
+        }
+    }
+
+  # aws_lambda_function.CheckEligibility_lambda will be created
+  + resource "aws_lambda_function" "CheckEligibility_lambda" {
+      + architectures                  = (known after apply)
+      + arn                            = (known after apply)
+      + filename                       = "../../output/lambdas//CheckEligibility_lambda.zip"
+      + function_name                  = "CheckEligibility_lambda"
+      + handler                        = "CheckEligibility.lambda_handler"
+      + id                             = (known after apply)
+      + invoke_arn                     = (known after apply)
+      + last_modified                  = (known after apply)
+      + memory_size                    = 128
+      + package_type                   = "Zip"
+      + publish                        = false
+      + qualified_arn                  = (known after apply)
+      + reserved_concurrent_executions = -1
+      + role                           = (known after apply)
+      + runtime                        = "python3.8"
+      + signing_job_arn                = (known after apply)
+      + signing_profile_version_arn    = (known after apply)
+      + source_code_hash               = "+xOjjscpJd3Ayr0KQcRXU6LehRDZ1rDDuq9nklOlkfY="
+      + source_code_size               = (known after apply)
+      + tags_all                       = (known after apply)
+      + timeout                        = 3
+      + version                        = (known after apply)
+
+      + tracing_config {
+          + mode = (known after apply)
+        }
+    }
+
+  # aws_lambda_function.ReceiveFillingForm_lambda will be created
+  + resource "aws_lambda_function" "ReceiveFillingForm_lambda" {
+      + architectures                  = (known after apply)
+      + arn                            = (known after apply)
+      + filename                       = "../../output/lambdas//ReceiveFillingForm.zip"
+      + function_name                  = "ReceiveFillingForm"
+      + handler                        = "ReceiveFillingForm.lambda_handler"
+      + id                             = (known after apply)
+      + invoke_arn                     = (known after apply)
+      + last_modified                  = (known after apply)
+      + memory_size                    = 128
+      + package_type                   = "Zip"
+      + publish                        = false
+      + qualified_arn                  = (known after apply)
+      + reserved_concurrent_executions = -1
+      + role                           = (known after apply)
+      + runtime                        = "python3.8"
+      + signing_job_arn                = (known after apply)
+      + signing_profile_version_arn    = (known after apply)
+      + source_code_hash               = "+xOjjscpJd3Ayr0KQcRXU6LehRDZ1rDDuq9nklOlkfY="
+      + source_code_size               = (known after apply)
+      + tags_all                       = (known after apply)
+      + timeout                        = 3
+      + version                        = (known after apply)
+
+      + tracing_config {
+          + mode = (known after apply)
+        }
+    }
+
+  # aws_route53_record.main-ns will be created
+  + resource "aws_route53_record" "main-ns" {
+      + allow_overwrite = (known after apply)
+      + fqdn            = (known after apply)
+      + id              = (known after apply)
+      + name            = "mybank.com"
+      + records         = (known after apply)
+      + ttl             = 30
+      + type            = "NS"
+      + zone_id         = (known after apply)
+    }
+
+  # aws_route53_zone.main will be created
+  + resource "aws_route53_zone" "main" {
+      + arn           = (known after apply)
+      + comment       = "Managed by Terraform"
+      + force_destroy = false
+      + id            = (known after apply)
+      + name          = "mybank.com"
+      + name_servers  = (known after apply)
+      + tags_all      = (known after apply)
+      + zone_id       = (known after apply)
+    }
+
+  # aws_s3_bucket.react_app_bucket will be created
+  + resource "aws_s3_bucket" "react_app_bucket" {
+      + acceleration_status                  = (known after apply)
+      + acl                                  = (known after apply)
+      + arn                                  = (known after apply)
+      + bucket                               = "bank_bucket_react_app"
+      + bucket_domain_name                   = (known after apply)
+      + bucket_regional_domain_name          = (known after apply)
+      + cors_rule                            = (known after apply)
+      + force_destroy                        = false
+      + grant                                = (known after apply)
+      + hosted_zone_id                       = (known after apply)
+      + id                                   = (known after apply)
+      + lifecycle_rule                       = (known after apply)
+      + logging                              = (known after apply)
+      + policy                               = (known after apply)
+      + region                               = (known after apply)
+      + replication_configuration            = (known after apply)
+      + request_payer                        = (known after apply)
+      + server_side_encryption_configuration = (known after apply)
+      + tags_all                             = (known after apply)
+      + versioning                           = (known after apply)
+      + website                              = (known after apply)
+      + website_domain                       = (known after apply)
+      + website_endpoint                     = (known after apply)
+
+      + object_lock_configuration {
+          + object_lock_enabled = (known after apply)
+          + rule                = (known after apply)
+        }
+    }
+
+  # aws_s3_bucket_acl.react_app_bucket_acl will be created
+  + resource "aws_s3_bucket_acl" "react_app_bucket_acl" {
+      + acl    = "private"
+      + bucket = (known after apply)
+      + id     = (known after apply)
+
+      + access_control_policy {
+          + grant {
+              + permission = (known after apply)
+
+              + grantee {
+                  + display_name  = (known after apply)
+                  + email_address = (known after apply)
+                  + id            = (known after apply)
+                  + type          = (known after apply)
+                  + uri           = (known after apply)
+                }
+            }
+
+          + owner {
+              + display_name = (known after apply)
+              + id           = (known after apply)
+            }
+        }
+    }
+
+  # aws_s3_bucket_website_configuration.react_app_bucket_website_configuration will be created
+  + resource "aws_s3_bucket_website_configuration" "react_app_bucket_website_configuration" {
+      + bucket           = "bank_bucket_react_app"
+      + id               = (known after apply)
+      + website_domain   = (known after apply)
+      + website_endpoint = (known after apply)
+
+      + error_document {
+          + key = "error.html"
+        }
+
+      + index_document {
+          + suffix = "index.html"
+        }
+
+      + routing_rule {
+          + condition {
+              + key_prefix_equals = "process/"
+            }
+
+          + redirect {
+              + replace_key_prefix_with = "processing/"
+            }
+        }
+    }
+
+  # aws_sqs_queue.calculate_amount_limit_queue will be created
+  + resource "aws_sqs_queue" "calculate_amount_limit_queue" {
+      + arn                               = (known after apply)
+      + content_based_deduplication       = false
+      + deduplication_scope               = (known after apply)
+      + delay_seconds                     = 0
+      + fifo_queue                        = false
+      + fifo_throughput_limit             = (known after apply)
+      + id                                = (known after apply)
+      + kms_data_key_reuse_period_seconds = (known after apply)
+      + max_message_size                  = 262144
+      + message_retention_seconds         = 345600
+      + name                              = "calculate_amount_limit_queue"
+      + name_prefix                       = (known after apply)
+      + policy                            = (known after apply)
+      + receive_wait_time_seconds         = 0
+      + sqs_managed_sse_enabled           = true
+      + tags_all                          = (known after apply)
+      + url                               = (known after apply)
+      + visibility_timeout_seconds        = 30
+    }
+
+  # aws_sqs_queue.check_bureau_queue will be created
+  + resource "aws_sqs_queue" "check_bureau_queue" {
+      + arn                               = (known after apply)
+      + content_based_deduplication       = false
+      + deduplication_scope               = (known after apply)
+      + delay_seconds                     = 0
+      + fifo_queue                        = false
+      + fifo_throughput_limit             = (known after apply)
+      + id                                = (known after apply)
+      + kms_data_key_reuse_period_seconds = (known after apply)
+      + max_message_size                  = 262144
+      + message_retention_seconds         = 345600
+      + name                              = "check_bureau_queue"
+      + name_prefix                       = (known after apply)
+      + policy                            = (known after apply)
+      + receive_wait_time_seconds         = 0
+      + sqs_managed_sse_enabled           = true
+      + tags_all                          = (known after apply)
+      + url                               = (known after apply)
+      + visibility_timeout_seconds        = 30
+    }
+
+  # aws_sqs_queue.check_egilibility_queue will be created
+  + resource "aws_sqs_queue" "check_egilibility_queue" {
+      + arn                               = (known after apply)
+      + content_based_deduplication       = false
+      + deduplication_scope               = (known after apply)
+      + delay_seconds                     = 0
+      + fifo_queue                        = false
+      + fifo_throughput_limit             = (known after apply)
+      + id                                = (known after apply)
+      + kms_data_key_reuse_period_seconds = (known after apply)
+      + max_message_size                  = 262144
+      + message_retention_seconds         = 345600
+      + name                              = "check_egilibility_queue"
+      + name_prefix                       = (known after apply)
+      + policy                            = (known after apply)
+      + receive_wait_time_seconds         = 0
+      + sqs_managed_sse_enabled           = true
+      + tags_all                          = (known after apply)
+      + url                               = (known after apply)
+      + visibility_timeout_seconds        = 30
+    }
+
+  # aws_wafv2_web_acl.bank_app will be created
+  + resource "aws_wafv2_web_acl" "bank_app" {
+      + arn         = (known after apply)
+      + capacity    = (known after apply)
+      + description = "bank app managed rule."
+      + id          = (known after apply)
+      + lock_token  = (known after apply)
+      + name        = "managed-rule-bank_app"
+      + scope       = "REGIONAL"
+      + tags        = {
+          + "Cost_Center" = "XXSS"
+          + "Name"        = "WAF_RULE"
+        }
+      + tags_all    = {
+          + "Cost_Center" = "XXSS"
+          + "Name"        = "WAF_RULE"
+        }
+
+      + default_action {
+          + allow {
+            }
+        }
+
+      + rule {
+          + name     = "rule-1"
+          + priority = 1
+
+          + override_action {
+              + count {}
+            }
+
+          + statement {
+
+              + managed_rule_group_statement {
+                  + name        = "AWSManagedRulesCommonRuleSet"
+                  + vendor_name = "AWS"
+
+                  + excluded_rule {
+                      + name = "SizeRestrictions_QUERYSTRING"
+                    }
+                  + excluded_rule {
+                      + name = "NoUserAgent_HEADER"
+                    }
+                }
+            }
+
+          + visibility_config {
+              + cloudwatch_metrics_enabled = true
+              + metric_name                = "waf-metric"
+              + sampled_requests_enabled   = false
+            }
+        }
+
+      + visibility_config {
+          + cloudwatch_metrics_enabled = true
+          + metric_name                = "waf-metric"
+          + sampled_requests_enabled   = false
+        }
+    }
+
+Plan: 13 to add, 0 to change, 0 to destroy.
 
 ```
 </details>
@@ -313,6 +667,7 @@ Availability
 ## CICD Automation (Bonus)
 
 ![alt text](/images/cicd.jpg "cicd")
+
 This toolchain is going to help us to deploy to different environments in our AWS Control Tower, in this first version we are not going to consider some steps in the pipeline as their are not the main focus of this test. 
 
 ## Permissions (Bonus)
@@ -336,7 +691,7 @@ As we are using AWS services to give access to specific endpoint and also to aut
 ## Disaster Recovery Plan (Bonus)
 
 * Continous Backup will be enabled for our DynamoDB
-* Procedure to restore database in another location must be documented.
+* Procedure to restore database in another location must be documented
 
 
 ## Compliance (Bonus)
